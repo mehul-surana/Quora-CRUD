@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Answers</title></head>
+<body>
+  <h2>{{ question.title }}</h2>
+  <a href="{% url 'question_list' %}">Back to Questions</a>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="content" placeholder="Your answer">
+    <button type="submit">Answer</button>
+  </form>
+  <ul>
+    {% for a in answers %}
+      <li>
+        {{ a.content }} - {{ a.user.username }}
+        <form method="post" action="{% url 'like_answer' a.id %}">
+          {% csrf_token %}
+          <button type="submit">Like</button> Likes: {{ a.likes.count }}
+        </form>
+      </li>
+    {% empty %}
+      <li>No answers yet.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

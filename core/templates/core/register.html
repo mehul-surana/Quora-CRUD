@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>Register</title></head>
+<body>
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+    Username: <input type="text" name="username"><br>
+    Password: <input type="password" name="password"><br>
+    <button type="submit">Register</button>
+  </form>
+  {% if errors %}
+    <div style="color:red;">
+      {{ errors }}
+    </div>
+  {% endif %}
+  <a href="{% url 'login_page' %}">Already have an account? Login</a>
+</body>
+</html>
